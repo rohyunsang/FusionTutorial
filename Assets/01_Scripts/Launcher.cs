@@ -8,7 +8,7 @@ using System;
 public class Launcher : MonoBehaviour, INetworkRunnerCallbacks
 {
     private NetworkRunner networkRunner;
-    [SerializeField] private NetworkPrefabRef _playerPrefab; // 
+    // [SerializeField] private NetworkPrefabRef _playerPrefab; 
 
     public async void GameStart()
     {
@@ -16,7 +16,7 @@ public class Launcher : MonoBehaviour, INetworkRunnerCallbacks
         networkRunner = gameObject.AddComponent<NetworkRunner>();
         networkRunner.ProvideInput = true; // player move 
 
-        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+        var scene = SceneRef.FromIndex(1);
         var sceneInfo = new NetworkSceneInfo();
 
         if (scene.IsValid)
@@ -76,12 +76,14 @@ public class Launcher : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        /*
         if(player == runner.LocalPlayer)
         {
             // Player Spawn 
             // Unity GameObject 생성할 때 Instantiate를 쓰는데, 하지만 네트워크상에서 무언가를 생성하려면 Spawn을 사용해야합니다.
             runner.Spawn(_playerPrefab, new Vector3(0f,1f,0f), Quaternion.identity);
         }
+        */
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
