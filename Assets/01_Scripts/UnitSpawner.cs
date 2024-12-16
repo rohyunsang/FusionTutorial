@@ -23,7 +23,7 @@ public class UnitSpawner : NetworkBehaviour
 
     private void SpawnHumanWarriorUnit() // using Button
     {
-        Runner.Spawn(_human_WarriorPrefab, new Vector3(-5f, 0f, 0f), Quaternion.Euler(0f, 180f, 0f));
+        Runner.Spawn(_human_WarriorPrefab, new Vector3(-5f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f));
     }
 
     private void SpawnDevilWarriorUnit() // using Button
