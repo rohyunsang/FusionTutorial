@@ -15,6 +15,7 @@ public class Unit : NetworkBehaviour
     [Networked, OnChangedRender(nameof(HPChanged))]
     public float HP { get; set; } = 100f; // 서버 상에서 동기화
     public UnitType type;
+    [SerializeField] private TextMeshPro _HPBar;
 
     [SerializeField] private TextMeshPro _HPBar;
 
@@ -183,7 +184,10 @@ public class Unit : NetworkBehaviour
             Invoke(nameof(DisableAttackCollider), 1.0f); // 1.0초 후 비활성화
         }
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     void EnableAttackCollider()
     {
         _boxCollider2D.enabled = true;
@@ -197,7 +201,11 @@ public class Unit : NetworkBehaviour
     void HPChanged()
     {
         Debug.Log($"Health changed to: {HP} :" + gameObject.name);
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
         _HPBar.text = HP.ToString();
 
         if (HP <= 0)
