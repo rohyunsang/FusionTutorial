@@ -1,6 +1,7 @@
 using UnityEngine;
 using Fusion;
 using System.Collections.Generic;
+using TMPro;
 public enum UnitType
 {
     Human = 0,
@@ -14,6 +15,9 @@ public class Unit : NetworkBehaviour
     [Networked, OnChangedRender(nameof(HPChanged))]
     public float HP { get; set; } = 100f; // 서버 상에서 동기화
     public UnitType type;
+
+    [SerializeField] private TextMeshPro _HPBar;
+
 
     [Header("Attack")]
     [SerializeField] private BoxCollider2D _boxCollider2D;
@@ -106,6 +110,7 @@ public class Unit : NetworkBehaviour
             _rb.linearVelocity = new Vector2(moveSpeed * -1, _rb.linearVelocity.y) * Runner.DeltaTime;
         }
     }
+
     GameObject DetectAlly()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _circleCollider2D.radius, LayerMask.GetMask(type.ToString()));
@@ -170,14 +175,20 @@ public class Unit : NetworkBehaviour
         {
             lastAttackTime = Time.time;
 
-            _boxCollider2D.enabled = true;
+            Invoke(nameof(EnableAttackCollider), 0.5f); // 0.5초 후 활성화
 
             Debug.Log("Attack!");
 
             _nAnim.Animator.SetTrigger("2_Attack");
-            Invoke(nameof(DisableAttackCollider), 0.2f); // 0.2초 후 비활성화
+            Invoke(nameof(DisableAttackCollider), 1.0f); // 1.0초 후 비활성화
         }
     }
+
+    void EnableAttackCollider()
+    {
+        _boxCollider2D.enabled = true;
+    }
+
     void DisableAttackCollider()
     {
         _boxCollider2D.enabled = false;
@@ -186,6 +197,9 @@ public class Unit : NetworkBehaviour
     void HPChanged()
     {
         Debug.Log($"Health changed to: {HP} :" + gameObject.name);
+        
+        _HPBar.text = HP.ToString();
+
         if (HP <= 0)
         {
             Runner.Despawn(Object); 
