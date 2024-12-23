@@ -23,10 +23,10 @@ public class Unit : NetworkBehaviour
     [SerializeField] private BoxCollider2D _boxCollider2D;
     [SerializeField] private Weapon _weapon;
     public float AttackDamage { get; set; } = 10f;  // 공격력
-    private float detectionRange = 0.8f;  // 공격 탐지 범위
-    private float attackCooldown = 1f;    // 공격 쿨타임
+    protected float detectionRange = 0.8f;  // 공격 탐지 범위
+    protected float attackCooldown = 1f;    // 공격 쿨타임
     private bool isAttacking = false;     // 
-    private float lastAttackTime;         // 공격 쿨타임을 위한 변수. 
+    protected float lastAttackTime;         // 공격 쿨타임을 위한 변수. 
 
     [Header("Move")]
     private float moveSpeed = 50f;
@@ -35,7 +35,7 @@ public class Unit : NetworkBehaviour
 
 
     [Header("Anim")]
-    private NetworkMecanimAnimator _nAnim;
+    protected NetworkMecanimAnimator _nAnim;
 
     [Header("Etc")]
     private static readonly Dictionary<UnitType, UnitType> OppositeType = new Dictionary<UnitType, UnitType>
@@ -44,19 +44,21 @@ public class Unit : NetworkBehaviour
         { UnitType.Devil, UnitType.Human }
     };
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Debug.Log("Awake");
 
         _rb = GetComponent<Rigidbody2D>();
-        _weapon.type = this.type;
+        if(_weapon != null)
+            _weapon.type = this.type;
     }
 
     public override void Spawned()
     {
         Debug.Log("Spawned");
 
-        _weapon.AttackDamage = AttackDamage;  // network value 
+        if (_weapon != null)
+            _weapon.AttackDamage = AttackDamage;  // network value 
         _nAnim = GetComponent<NetworkMecanimAnimator>();
     }
 
@@ -166,7 +168,7 @@ public class Unit : NetworkBehaviour
         return null; // 적이 없으면 null 반환
     }
 
-    void Attack()
+    public virtual void Attack() // override 할 수 있게 
     {
         _nAnim.Animator.SetBool("1_Move", false);
         Debug.Log("Attack");
