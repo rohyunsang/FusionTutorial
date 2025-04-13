@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &322670490243870080
+--- !u!1 &822078849453534319
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1975124212592648188}
-  - component: {fileID: 6966990203541260693}
-  - component: {fileID: 4063936709411753064}
+  - component: {fileID: 1469905663816273997}
+  - component: {fileID: 2224571994815359633}
+  - component: {fileID: 5600320281381252253}
   m_Layer: 0
   m_Name: UnitSpawner
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1975124212592648188
+--- !u!4 &1469905663816273997
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322670490243870080}
+  m_GameObject: {fileID: 822078849453534319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,33 +33,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6966990203541260693
+--- !u!114 &2224571994815359633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322670490243870080}
+  m_GameObject: {fileID: 822078849453534319}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 700150ac314a4974b963970c70e598c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4063936709411753064
+  _human_WarriorSpawnButton: {fileID: 0}
+  _human_ArcherSpawnButton: {fileID: 0}
+  _human_WarriorPrefab:
+    RawGuidValue: e2c7f96adb79dc2408f9ab8cda7755a3
+  _human_ArcherPrefab:
+    RawGuidValue: 4ecf43df7b5e5dd45a160a16de05936f
+  _devil_WarriorSpawnButton: {fileID: 0}
+  _devil_ArcherSpawnButton: {fileID: 0}
+  _devil_WarriorPrefab:
+    RawGuidValue: 13c6af3524290f6489f26b74bbc180a0
+  _devil_ArcherPrefab:
+    RawGuidValue: 05f6815a89907ae4c8b65c72d96b8808
+--- !u!114 &5600320281381252253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322670490243870080}
+  m_GameObject: {fileID: 822078849453534319}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 1136046395
+  SortKey: 1944119487
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 6966990203541260693}
+  - {fileID: 2224571994815359633}

@@ -80,7 +80,7 @@ public class Unit : NetworkBehaviour
             var enemy = DetectEnemy();
             if (enemy != null)
             {
-                Debug.Log($"나의 타입 {type} : 발견된 적: {enemy.type}");
+                Debug.Log($"나의 타입 {type} : 발견된 적: {enemy.gameObject}");
                 isAttacking = true;
                 _rb.linearVelocity = Vector2.zero;
                 Attack(); // 감지된 적을 공격
@@ -135,7 +135,7 @@ public class Unit : NetworkBehaviour
         return null; // 아군이 없거나 자기 자신밖에 없는 경우 null 반환
     }
 
-    Unit DetectEnemy()
+    GameObject DetectEnemy()
     {
         RaycastHit2D[] hits;
 
@@ -153,14 +153,25 @@ public class Unit : NetworkBehaviour
             return null;
         }
 
-        // 탐지된 객체 중 Unit 컴포넌트가 있는 객체만 반환
+        // 탐지된 객체 중 Unit, Statue 컴포넌트가 있는 객체만 반환
         foreach (var hit in hits)
         {
-            if (hit.collider != null && hit.collider.TryGetComponent<Unit>(out var enemyUnit))
+            if(hit.collider != null)
             {
-                if (enemyUnit.type == OppositeType[type]) // 반대 타입인지 확인
+                if(hit.collider.TryGetComponent<Unit>(out var enemyUnit))
                 {
-                    return enemyUnit; // 가장 가까운 적 반환
+                    if(enemyUnit.type == OppositeType[type])
+                    {
+                        return enemyUnit.gameObject;
+                    }
+                }
+
+                if (hit.collider.TryGetComponent<Statue>(out var statue))
+                {
+                    if(statue.type == OppositeType[type])
+                    {
+                        return statue.gameObject;
+                    }
                 }
             }
         }
