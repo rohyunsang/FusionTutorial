@@ -76,14 +76,27 @@ public class Launcher : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        /*
-        if(player == runner.LocalPlayer)
+        // 이 세션(방)에 첫번째로 들어온 사람이, Human 팀 
+        // 두번째로 들어온 사람이 Devil 팀으로 처리를 해줄게요. 
+    }
+
+    public string SetTeam(NetworkRunner runner)
+    {
+        Debug.Log(runner.LocalPlayer.ToString());
+
+        // Local Player 1 
+        // Local Player 2 
+
+        if (runner.LocalPlayer.ToString().Contains("1"))
         {
-            // Player Spawn 
-            // Unity GameObject 생성할 때 Instantiate를 쓰는데, 하지만 네트워크상에서 무언가를 생성하려면 Spawn을 사용해야합니다.
-            runner.Spawn(_playerPrefab, new Vector3(0f,1f,0f), Quaternion.identity);
+            // 첫번째로 들어온 플레이어 
+            return "Human";
         }
-        */
+        else
+        {
+            return "Devil";
+        }
+
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

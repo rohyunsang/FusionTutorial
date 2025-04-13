@@ -29,6 +29,21 @@ public class Projectile : NetworkBehaviour
                 GetComponent<CircleCollider2D>().enabled = false; // 두번 충돌 될 수도 있으니까, Collider를 꺼 줄게요.
             }
         }
+        else if (collision.TryGetComponent<Statue>(out var statue))
+        {
+            if (HasStateAuthority == false) return;
+
+            if (statue.type == OppositeType[type])
+            {
+                Debug.Log($"Hit {statue.type}");
+                statue.RPC_ApplyDamage(AttackDamage);
+                AttackDamage = 0f;
+
+                // 적에게 맞은 화살은 삭제. 
+                Invoke(nameof(DestroyProjectile), 0.05f);
+                GetComponent<CircleCollider2D>().enabled = false; // 두번 충돌 될 수도 있으니까, Collider를 꺼 줄게요.
+            }
+        }
     }
 
     private void DestroyProjectile()

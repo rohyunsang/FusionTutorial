@@ -28,5 +28,14 @@ public class Weapon : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = false;
             }
         }
+        else if (collision.TryGetComponent<Statue>(out var statue))
+        {
+            if (statue.type == OppositeType[type])
+            {
+                Debug.Log($"Hit {statue.type}");
+                statue.RPC_ApplyDamage(AttackDamage);
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
     }
 }
